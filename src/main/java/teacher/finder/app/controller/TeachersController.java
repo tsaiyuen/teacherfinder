@@ -3,6 +3,8 @@ package teacher.finder.app.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import teacher.finder.app.teacher.DadosCadastroTeacher;
 import teacher.finder.app.teacher.DadosListagemTeacher;
@@ -25,8 +27,8 @@ public class TeachersController {
     }
 
     @GetMapping
-    public List<DadosListagemTeacher> listTeachers(){
-        return repository.findAll().stream().map(DadosListagemTeacher::new).toList();
+    public Page<DadosListagemTeacher> listTeachers(Pageable pagination){
+        return repository.findAll(pagination).map(DadosListagemTeacher::new);
     }
 
 }
