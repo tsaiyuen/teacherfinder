@@ -26,7 +26,7 @@ public class TeachersController {
 
     @GetMapping
     public Page<DadosListagemTeacher> listTeachers(@PageableDefault(size = 10, sort = {"nome"}) Pageable pagination){
-        return repository.findAll(pagination).map(DadosListagemTeacher::new);
+        return repository.findAllByAtivoTrue(pagination).map(DadosListagemTeacher::new);
     }
 
     @PutMapping
@@ -39,7 +39,9 @@ public class TeachersController {
     @DeleteMapping("/{id}")
     @Transactional
     public void excluir(@PathVariable Long id){
-        repository.deleteById(id);
+        var teacher = repository.getReferenceById(id);
+        teacher.excluir();
+
     }
 }
 
