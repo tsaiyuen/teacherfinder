@@ -35,5 +35,11 @@ public class TeachersController {
         var teacher = repository.getReferenceById(dados.id());
         teacher.atualizar(dados);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        repository.deleteById(id);
+    }
 }
 
