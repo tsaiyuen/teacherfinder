@@ -5,11 +5,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-import teacher.finder.app.teacher.DadosCadastroTeacher;
-import teacher.finder.app.teacher.DadosListagemTeacher;
-import teacher.finder.app.teacher.Teacher;
-import teacher.finder.app.teacher.TeacherRepository;
+import teacher.finder.app.teacher.*;
 
 import java.util.List;
 
@@ -27,9 +25,15 @@ public class TeachersController {
     }
 
     @GetMapping
-    public Page<DadosListagemTeacher> listTeachers(Pageable pagination){
+    public Page<DadosListagemTeacher> listTeachers(@PageableDefault(size = 10, sort = {"nome"}) Pageable pagination){
         return repository.findAll(pagination).map(DadosListagemTeacher::new);
     }
 
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizarTeacher dados){
+        var teacher = repository.getReferenceById(dados.id());
+        teacher.atualizar(dados);
+    }
 }
 
