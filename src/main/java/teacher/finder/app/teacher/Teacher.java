@@ -18,6 +18,7 @@ public class Teacher {
     private Long id;
     private String nome;
     private String email;
+    private String telefone;
     private String matricula;
 
     @Enumerated(EnumType.STRING)
@@ -29,6 +30,7 @@ public class Teacher {
     public Teacher(DadosCadastroTeacher dados) {
         this.nome = dados.nome();
         this.email = dados.email();
+        this.telefone = dados.telefone();
         this.matricula = dados.matricula();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
