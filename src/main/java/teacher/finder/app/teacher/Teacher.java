@@ -5,7 +5,7 @@ import lombok.*;
 import teacher.finder.app.endereco.DadosEndereco;
 import teacher.finder.app.endereco.Endereco;
 
-@Table(name = "teacher")
+@Table(name = "teachers")
 @Entity(name = "Teacher")
 @Getter
 @NoArgsConstructor
@@ -30,7 +30,7 @@ public class Teacher {
         this.nome = dados.nome();
         this.email = dados.email();
         this.matricula = dados.matricula();
-        this.especialidade = dados.especialide();
+        this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
     }
 }
